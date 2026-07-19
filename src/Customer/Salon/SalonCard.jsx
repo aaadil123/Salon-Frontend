@@ -21,7 +21,7 @@ const SalonCard = ({ salon }) => {
     >
       <div className="relative h-[240px] overflow-hidden">
         <img
-          src={salon.image}
+          src={salon.images[0]}
           alt={salon.name}
           className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
         />

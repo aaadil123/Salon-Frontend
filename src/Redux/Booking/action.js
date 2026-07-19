@@ -22,7 +22,7 @@ export const createBooking = ({ jwt, salonId, bookingData }) => async (dispatch)
     }
 };
 
-export const fetchCustomerBookings = ({jwt}) => async (dispatch) => {
+export const fetchCustomerBookings = (jwt) => async (dispatch) => {
     dispatch({ type: FETCH_CUSTOMER_BOOKINGS_REQUEST });
     try {
         const { data } = await api.get(`${API_BASE_URL}/customer`, {

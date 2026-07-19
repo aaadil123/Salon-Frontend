@@ -6,7 +6,7 @@ const API_BASE_URL = './api/service-offering'
 export const createServiceAction = ({ service, jwt }) => async (dispatch) => {
     dispatch({ type: CREATE_SERVICE_REQUEST });
     try {
-        const { data } = await api.post(`$(API_BASE_URL}/salon-owner`, service, {
+        const { data } = await api.post(`${API_BASE_URL}/salon-owner`, service, {
             headers: { Authorization: `Bearer ${jwt}` },
         });
         console.log("service created", data)

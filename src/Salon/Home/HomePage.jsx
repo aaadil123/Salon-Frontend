@@ -14,15 +14,17 @@ import {
   fetchBookings,
   fetchEarnings,
 } from "../../Redux/Chart/action.js";
+import { fetchSalonByOwner } from "../../Redux/Salon/action.js";
 
 const HomePage = () => {
   const dispatch = useDispatch();
 
   const { earnings, bookings } = useSelector((store) => store.chart);
+  const {salon} = useSelector(store => store)
 
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
-
+    dispatch(fetchSalonByOwner(jwt))
     dispatch(fetchEarnings(jwt));
     dispatch(fetchBookings(jwt));
   }, [dispatch]);
@@ -53,7 +55,7 @@ const HomePage = () => {
           </p>
 
           <h1 className="mt-2 text-4xl font-bold text-[#111827]">
-            Welcome back, Monu Salon
+            Welcome back, {salon.salon?.name}
           </h1>
 
           <p className="mt-2 text-gray-500">

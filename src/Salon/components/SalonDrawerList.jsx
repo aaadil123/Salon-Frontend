@@ -77,6 +77,7 @@ const menu2 = [
     path: "/",
     icon: <Logout />,
     activeIcon: <Logout />,
+    action: "logout",
   },
 ];
 

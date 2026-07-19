@@ -42,14 +42,23 @@ export const fetchSalons = () => async (dispatch) => {
     dispatch({ type: FETCH_SALONS_REQUEST })
 
     try {
-        const response = await api.get(API_BASE_URL, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("jwt")}`
-            }
-        })
-        console.log("Salon fetched ------ ", response.data)
-        dispatch({ type: FETCH_SALONS_SUCCESS, payload: response.data })
+        // const response = await api.get(API_BASE_URL, {
+        //     headers: {
+        //         Authorization: `Bearer ${localStorage.getItem("jwt")}`
+        //     }
+        // })
+        // console.log("Salon fetched ------ ", response.data)
+        // dispatch({ type: FETCH_SALONS_SUCCESS, payload: response.data })
+        const response = await api.get(API_BASE_URL);
+
+        console.log("Salon fetched ------ ", response.data);
+
+        dispatch({
+            type: FETCH_SALONS_SUCCESS,
+            payload: response.data
+        });
     } catch (error) {
+        console.log(error);
         dispatch({ type: FETCH_SALONS_FAILURE, payload: error.message })
     }
 }
@@ -64,23 +73,23 @@ export const fetchSalonById = (salonId) => async (dispatch) => {
         })
 
         console.log("fetched salon by id: ", response.data);
-        
+
         dispatch({ type: FETCH_SALON_BY_ID_SUCCESS, payload: response.data })
     } catch (error) {
         dispatch({ type: FETCH_SALON_BY_ID_FAILURE, payload: error.message })
     }
 }
 
-export const fetchSalonByOwner = ({jwt}) => async (dispatch) => {
+export const fetchSalonByOwner = (jwt) => async (dispatch) => {
     dispatch({ type: FETCH_SALON_BY_OWNER_REQUEST })
-    
+
     try {
         const response = await api.get(`${API_BASE_URL}/owner`, {
             headers: {
                 Authorization: `Bearer ${jwt}`
             }
         })
-        
+
         console.log("fetch salon by owner response", response.data);
         dispatch({ type: FETCH_SALON_BY_OWNER_SUCCESS, payload: response.data })
     } catch (error) {

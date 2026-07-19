@@ -9,10 +9,14 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSalonByOwner } from "../../Redux/Salon/action";
 
 const Navbar = ({ DrawerList }) => {
+  const dispatch = useDispatch()
   const [open, setOpen] = useState(false);
   const isLargeScreen = useMediaQuery("(min-width:1024px)");
+  const {salon} = useSelector(store => store)
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -24,6 +28,10 @@ const Navbar = ({ DrawerList }) => {
       setOpen(false);
     }
   }, [isLargeScreen]);
+
+  useEffect(() => {
+    dispatch(fetchSalonByOwner(localStorage.getItem('jwt')))
+  },[])
   
 
   return (
@@ -60,7 +68,10 @@ const Navbar = ({ DrawerList }) => {
 
       <div className="flex items-center gap-3">
         <IconButton>
-          <Badge badgeContent={5} color="secondary">
+          <Badge
+            // badgeContent={5}
+            color="secondary"
+          >
             <NotificationsActive color="primary" />
           </Badge>
         </IconButton>
@@ -71,7 +82,7 @@ const Navbar = ({ DrawerList }) => {
             sx={{ width: 36, height: 36 }}
           />
           <div>
-            <p className="text-sm font-bold text-[#111827]">Monu Salon</p>
+            <p className="text-sm font-bold text-[#111827]">{salon.salon?.name}</p>
             <p className="text-xs text-gray-500">Verified Partner</p>
           </div>
         </div>

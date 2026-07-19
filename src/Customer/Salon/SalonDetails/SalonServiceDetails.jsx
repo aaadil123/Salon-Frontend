@@ -286,7 +286,7 @@ const SalonServiceDetails = () => {
             </p>
           </div>
 
-          <div className="space-y-5 lg:w-[58%]">
+          <div className="flex flex-col gap-3 lg:w-[58%]">
             <SelectedServiceList
               onRemove={handleRemoveService}
               selectedServices={bookingData.services}

@@ -16,7 +16,7 @@ export const fetchNotifications = () => async (dispatch) => {
 export const fetchNotificationsByUser = ({userId, jwt}) => async (dispatch) => {
     dispatch({ type: FETCH_NOTIFICATIONS_BY_USER_REQUEST });
     try {
-        const response = await api.get(`${ API_URL }/user/${ userId }`,
+        const response = await api.get(`${ API_URL }/user/${userId}`,
             {
                 headers: { Authorization: `Bearer ${ jwt }`},
             }
@@ -33,7 +33,7 @@ export const fetchNotificationsByUser = ({userId, jwt}) => async (dispatch) => {
 export const fetchNotificationsBySalon = ({salonId, jwt}) => async (dispatch) => {
     dispatch({ type: FETCH_NOTIFICATIONS_BY_SALON_REQUEST });
     try {
-        const response = await api.get(`${ API_URL }/salon-owner/salon/${ salonId }`,
+        const response = await api.get(`${ API_URL }/salon-owner/salon/${salonId}`,
             {
                 headers: { Authorization: `Bearer ${ jwt }`},
             }

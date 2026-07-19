@@ -19,7 +19,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getUser, logout } from "../../Redux/Auth/action";
-import useNotificatonWebSocket from "../../util/useNotificatonWebSocket";
+// import useNotificatonWebSocket from "../../util/useNotificatonWebSocket";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -65,7 +65,7 @@ const Navbar = () => {
       }
     }, [isLargeScreen]);
 
-    useNotificatonWebSocket(auth.user?.id, "user")
+    // useNotificatonWebSocket({userId:auth.user?.id, type:"user"})
 
   return (
     <>

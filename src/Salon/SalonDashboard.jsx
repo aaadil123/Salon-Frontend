@@ -6,16 +6,16 @@ import { fetchSalonByOwner } from '../Redux/Salon/action'
 import { getUser } from '../Redux/Auth/action'
 import { useDispatch, useSelector } from "react-redux";
 import { fetchNotificationsBySalon } from "../Redux/Notifications/action";
-import useNotificatonWebSocket from "../util/useNotificatonWebSocket";
+// import useNotificatonWebSocket from "../util/useNotificatonWebSocket";
 
 const SalonDashboard = () => {
   const dispatch = useDispatch()
   const {salon} = useSelector(store => store)
 
   useEffect(() => {
-    dispatch(fetchSalonByOwner({
-      jwt:localStorage.getItem('jwt')
-    }));
+    dispatch(fetchSalonByOwner(
+      localStorage.getItem("jwt")
+    ));
 
     dispatch(getUser(
       localStorage.getItem('jwt')
@@ -23,16 +23,16 @@ const SalonDashboard = () => {
 
   },[])
 
-  useEffect(() => {
-    if(salon.salon){
-      dispatch(fetchNotificationsBySalon({
-        salonId:salon.id,
-        jwt:localStorage.getItem('jwt')
-      }))
-    }
-  },[salon.salon])
+  // useEffect(() => {
+  //   if(salon.salon){
+  //     dispatch(fetchNotificationsBySalon({
+  //       salonId:salon.salon?.id,
+  //       jwt:localStorage.getItem('jwt')
+  //     }))
+  //   }
+  // },[salon.salon])
 
-  useNotificatonWebSocket(salon.salon?.id, "salon")
+  // useNotificatonWebSocket({userId:salon.salon?.id, type:"user"})
 
   return (
     <div className="min-h-screen bg-[#FCFBF8]">

@@ -22,29 +22,29 @@ const Notifications = () => {
 
   //realtime notification
 
-  const [stompClient, setStompClient] = useState(null);
+  // const [stompClient, setStompClient] = useState(null);
 
-  useEffect(() => {
-    if (auth.user?.id) {
-      const sock = new SockJS("http://localhost:8000/api/notifications/ws");
-      const stomp = Stomp.over(sock);
-      setStompClient(stomp);
-    }
-  }, [auth.user?.id]);
+  // useEffect(() => {
+  //   if (auth.user?.id) {
+  //     const sock = new SockJS("http://localhost:8000/api/notifications/ws");
+  //     const stomp = Stomp.over(sock);
+  //     setStompClient(stomp);
+  //   }
+  // }, [auth.user?.id]);
 
-  useEffect(()=>{
-    if(stompClient){
-      stompClient.connect({}, ()=>{
-        setStompClient.subscribe(`/notification/{type}/${auth.user?.id}`,
-          (message) => {
-            const receivedMessage = JSON.parse(message.body)
-            console.log("received notification from server", receivedMessage)
-            dispatch(addNotification(receivedMessage))
-        })
-      },
-      (error) => console.log("subscription error", error));
-    }
-  }, [stompClient, auth.user?.id])
+  // useEffect(()=>{
+    // if(stompClient){
+    //   stompClient.connect({}, ()=>{
+    //     setStompClient.subscribe(`/notification/{type}/${auth.user?.id}`,
+    //       (message) => {
+    //         const receivedMessage = JSON.parse(message.body)
+    //         console.log("received notification from server", receivedMessage)
+    //         dispatch(addNotification(receivedMessage))
+    //     })
+    //   },
+    //   (error) => console.log("subscription error", error));
+    // }
+  // }, [stompClient, auth.user?.id])
 
   return (
     <div className="min-h-screen bg-[#FCFBF8] px-6 lg:px-20 py-10">

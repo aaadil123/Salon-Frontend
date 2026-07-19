@@ -5,21 +5,36 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import { fetchSalonByOwner } from "../../Redux/Salon/action";
+import {logout} from '../../Redux/Auth/action'
 
 const DrawerList = ({ menu = [], menu2 = [], toggleDrawer }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch()
+  const {salon} = useSelector(store => store)
 
   const handleClick = (item) => () => {
+    if (item.action === "logout") {
+      dispatch(logout());
+      if (toggleDrawer) toggleDrawer(false)();
+      navigate("/");
+      return;
+    }
+
     navigate(item.path);
     if (toggleDrawer) toggleDrawer(false)();
   };
 
-  const renderItem = (item) => {
-    const active = item.path === location.pathname;
+  useEffect(() => {
+      dispatch(fetchSalonByOwner(localStorage.getItem("jwt")))
+    },[])
 
+  const renderItem = (item) => {
+  const active = item.path === location.pathname;
     return (
       <div key={item.name} onClick={handleClick(item)} className="px-4">
         <div
@@ -77,7 +92,7 @@ const DrawerList = ({ menu = [], menu2 = [], toggleDrawer }) => {
 
                 <div>
                   <h2 className="font-bold text-[#111827]">
-                    Monu Salon
+                    {salon.salon?.name}
                   </h2>
                   <Chip
                     label="Verified Partner"

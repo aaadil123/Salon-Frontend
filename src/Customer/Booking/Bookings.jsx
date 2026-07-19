@@ -29,7 +29,7 @@ const Bookings = () => {
         </div>
 
         {/* Booking Stats - add here */}
-        <div className="grid md:grid-cols-3 gap-6 mb-10">
+        {/* <div className="grid md:grid-cols-3 gap-6 mb-10">
           {bookingStats.map((item) => (
             <div
               key={item.title}
@@ -39,7 +39,7 @@ const Bookings = () => {
               <h2 className="text-4xl font-bold mt-2">{item.value}</h2>
             </div>
           ))}
-        </div>
+        </div> */}
 
         {/* Booking Cards */}
         <div className="space-y-8">
