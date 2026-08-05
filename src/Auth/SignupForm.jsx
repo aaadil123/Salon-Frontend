@@ -18,7 +18,7 @@ const SignupForm = () => {
     },
     onSubmit: (values) => {
         console.log("Submitting", values);
-        values.username = values.fullName;
+        values.username = values.fullName.split(" ")[0].toLowerCase();
         dispatch(registerUser({data:values, navigate}))
     },
   });
