@@ -128,8 +128,9 @@ const Auth = () => {
                   {isRegisterPage ? "Login" : "Create account"}
                 </Button>
               </div>
-              <div className="flex items-center justify-center items-center gap-2 md:gap-4">
+              <div className="flex justify-center items-center gap-2 md:gap-4">
                 <Button
+                  className="w-ful"
                   onClick={() => navigate("/become-partner")}
                   variant="contained"
                   sx={{
