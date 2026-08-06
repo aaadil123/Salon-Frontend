@@ -12,19 +12,19 @@ import {
   Menu,
   MenuItem,
   Drawer,
-  useMediaQuery 
+  useMediaQuery,
 } from "@mui/material";
 
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getUser, logout } from "../../Redux/Auth/action";
 // import useNotificatonWebSocket from "../../util/useNotificatonWebSocket";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
-  const {auth, notification} = useSelector(store => store)
+  const dispatch = useDispatch();
+  const { auth, notification } = useSelector((store) => store);
 
   const id = React.useId();
 
@@ -48,24 +48,23 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    dispatch(logout())
-    handleClose()
-  }
+    dispatch(logout());
+    handleClose();
+  };
 
-  useEffect(()=>{
-    dispatch(getUser(localStorage.getItem("jwt")))
+  useEffect(() => {
+    dispatch(getUser(localStorage.getItem("jwt")));
     // console.log(auth);
-  },[auth.jwt])
-
+  }, [auth.jwt]);
 
   // close mobile drawer automatically when screen becomes desktop
-    useEffect(() => {
-      if (isLargeScreen) {
-        setMobileOpen(false);
-      }
-    }, [isLargeScreen]);
+  useEffect(() => {
+    if (isLargeScreen) {
+      setMobileOpen(false);
+    }
+  }, [isLargeScreen]);
 
-    // useNotificatonWebSocket({userId:auth.user?.id, type:"user"})
+  // useNotificatonWebSocket({userId:auth.user?.id, type:"user"})
 
   return (
     <>
@@ -89,14 +88,9 @@ const Navbar = () => {
         >
           {/* LEFT */}
           <div className="flex items-center gap-12">
-            <div
-              onClick={() => navigate("/")}
-              className="cursor-pointer"
-            >
+            <div onClick={() => navigate("/")} className="cursor-pointer">
               <h1 className="font-bold text-3xl">
-                <span className="text-[#111827]">
-                  Luxe
-                </span>
+                <span className="text-[#111827]">Luxe</span>
                 <span className="text-[#7c3aed]">
                   Salon
                 </span>
@@ -115,9 +109,14 @@ const Navbar = () => {
                 Services
               </button>
 
-              <button className="font-medium text-gray-700 hover:text-[#7c3aed] transition">
-                Salons
-              </button>
+              {/* <button className="font-medium text-gray-700 hover:text-[#7c3aed] transition"> */}
+                <Link 
+                  to="/#salon"
+                  className="font-medium text-gray-700 hover:text-[#7c3aed] transition"
+                >
+                  Salons
+                </Link>
+              {/* </button> */}
 
               <button className="font-medium text-gray-700 hover:text-[#7c3aed] transition">
                 Reviews
@@ -127,22 +126,18 @@ const Navbar = () => {
 
           {/* RIGHT */}
           <div className="flex items-center gap-2 md:gap-4">
-
             <Button
-              onClick={()=>navigate('/become-partner')}
+              onClick={() => navigate("/become-partner")}
               variant="contained"
               sx={{
-                background:
-                  "linear-gradient(135deg,#667eea,#764ba2)",
+                background: "linear-gradient(135deg,#667eea,#764ba2)",
                 borderRadius: "999px",
               }}
             >
               Become Partner
             </Button>
 
-            <IconButton
-              onClick={() => navigate("/notifications")}
-            >
+            <IconButton onClick={() => navigate("/notifications")}>
               <Badge badgeContent={notification.unreadCount} color="error">
                 <NotificationsActive />
               </Badge>
@@ -164,8 +159,7 @@ const Navbar = () => {
                 >
                   <Avatar
                     sx={{
-                      background:
-                        "linear-gradient(135deg,#667eea,#764ba2)",
+                      background: "linear-gradient(135deg,#667eea,#764ba2)",
                     }}
                   >
                     {/* {user.fullName?.charAt(0)} */}
@@ -173,10 +167,8 @@ const Navbar = () => {
                   </Avatar>
                 </IconButton>
               </div>
-              ) : (
-              <IconButton
-                onClick={() => navigate("/login")}
-              >
+            ) : (
+              <IconButton onClick={() => navigate("/login")}>
                 <AccountCircle
                   sx={{
                     fontSize: 42,
@@ -197,12 +189,7 @@ const Navbar = () => {
       </div>
 
       {/* USER MENU */}
-      <Menu
-        id={menuId}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-      >
+      <Menu id={menuId} anchorEl={anchorEl} open={open} onClose={handleClose}>
         <MenuItem
           onClick={() => {
             navigate("/bookings");
@@ -212,15 +199,16 @@ const Navbar = () => {
           My Bookings
         </MenuItem>
 
-        {auth.user?.role === "SALON_OWNER" && <MenuItem
-          onClick={() => {
-            navigate("/salon-dashboard");
-            handleClose();
-          }}
-        >
-          Salon Dashboard
-        </MenuItem>
-        }
+        {auth.user?.role === "SALON_OWNER" && (
+          <MenuItem
+            onClick={() => {
+              navigate("/salon-dashboard");
+              handleClose();
+            }}
+          >
+            Salon Dashboard
+          </MenuItem>
+        )}
         <MenuItem
           onClick={() => {
             handleLogout();
@@ -247,8 +235,7 @@ const Navbar = () => {
               <Button
                 variant="contained"
                 sx={{
-                  background:
-                    "linear-gradient(135deg,#667eea,#764ba2)",
+                  background: "linear-gradient(135deg,#667eea,#764ba2)",
                 }}
                 onClick={() => navigate("/login")}
               >
@@ -262,17 +249,14 @@ const Navbar = () => {
                   My Bookings
                 </button>
 
-                <button>
-                  Logout
-                </button>
+                <button>Logout</button>
               </>
             )}
 
             <Button
               variant="contained"
               sx={{
-                background:
-                  "linear-gradient(135deg,#667eea,#764ba2)",
+                background: "linear-gradient(135deg,#667eea,#764ba2)",
               }}
             >
               Become Partner

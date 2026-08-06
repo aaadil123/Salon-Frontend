@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
+
 import Banner from "./Banner";
 import HomeServiceCard from "./HomeServiceCard";
 import { services } from "../../Data/services";
@@ -13,9 +15,30 @@ import Statistics from "./Statistics";
 import SalonGallery from "./SalonGallery";
 
 const Home = () => {
+  const salonRef = useRef(null);
+  const location = useLocation();
+
+  const handleBookAppointment = () => {
+    salonRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
+  useEffect(() => {
+    if (location.hash === "#salon") {
+      setTimeout(() => {
+        salonRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 100);
+    }
+  }, [location.hash]);
+
   return (
     <>
-      <Banner />
+      <Banner onBookAppointment={handleBookAppointment} />
 
       <Statistics />
 
@@ -23,7 +46,13 @@ const Home = () => {
 
       <PopularServices />
 
-      <SalonShowcase />
+      <div
+        id="salon"
+        ref={salonRef}
+        className="scroll-mt-[60px]"
+      >
+        <SalonShowcase />
+      </div>
 
       <CustomerReviews />
 

@@ -50,7 +50,7 @@ const SalonAccountForm = () => {
         email: values.email,
         password: values.password,
         role: "SALON_OWNER",
-        username: values.email.split("@")[0]
+        username: values.fullName.split(" ")[0].toLowerCase()
       }
 
       const salonDetails = {

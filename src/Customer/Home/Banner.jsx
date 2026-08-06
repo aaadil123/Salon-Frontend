@@ -6,7 +6,7 @@ import {
   LocationOn,
 } from "@mui/icons-material";
 
-const Banner = () => {
+const Banner = ({onBookAppointment}) => {
   return (
     <section
       id="hero"
@@ -145,6 +145,7 @@ const Banner = () => {
                 borderRadius: "999px",
                 px: 4,
               }}
+              onClick={onBookAppointment}
             >
               Book Appointment
             </Button>
@@ -157,6 +158,7 @@ const Banner = () => {
                 color: "white",
                 borderColor: "white",
               }}
+              onClick={onBookAppointment}
             >
               Explore Salons
             </Button>
