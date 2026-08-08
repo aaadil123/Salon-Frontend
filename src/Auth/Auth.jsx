@@ -128,19 +128,6 @@ const Auth = () => {
                   {isRegisterPage ? "Login" : "Create account"}
                 </Button>
               </div>
-              <div className="flex justify-center items-center gap-2 md:gap-4">
-                <Button
-                  className="w-ful"
-                  onClick={() => navigate("/become-partner")}
-                  variant="contained"
-                  sx={{
-                    background: "linear-gradient(135deg,#667eea,#764ba2)",
-                    borderRadius: "999px",
-                  }}
-                >
-                  Become Partner
-                </Button>
-              </div>
             </div>
           </section>
         </div>
