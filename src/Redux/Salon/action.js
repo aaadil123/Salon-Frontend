@@ -42,16 +42,16 @@ export const fetchSalons = () => async (dispatch) => {
     dispatch({ type: FETCH_SALONS_REQUEST })
 
     try {
-        // const response = await api.get(API_BASE_URL, {
-        //     headers: {
-        //         Authorization: `Bearer ${localStorage.getItem("jwt")}`
-        //     }
-        // })
-        // console.log("Salon fetched ------ ", response.data)
-        // dispatch({ type: FETCH_SALONS_SUCCESS, payload: response.data })
-        const response = await api.get(API_BASE_URL);
+        const response = await api.get(API_BASE_URL, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("jwt")}`
+            }
+        })
+        console.log("Salon fetched ------ ", response.data)
+        dispatch({ type: FETCH_SALONS_SUCCESS, payload: response.data })
+        // const response = await api.get(API_BASE_URL);
 
-        console.log("Salon fetched ------ ", response.data);
+        // console.log("Salon fetched ------ ", response.data);
 
         dispatch({
             type: FETCH_SALONS_SUCCESS,
